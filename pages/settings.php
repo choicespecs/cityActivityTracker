@@ -4,19 +4,27 @@
     verifyLogin();
     $settings_error = 0;
     if (isset($_POST['submitButton'])) {
+        $changed = 0;
         if($_FILES['profile-img']['size'] != 0) {
           $file_img = $_FILES["profile-img"];
           uploadUserImage($file_img, $_SESSION['user']);
+          $changed = 1;
         }   
 
         if (!empty($_POST['settings-location'])) {
           $new_lid = validateLocation($_POST['settings-location']);
           updateLocation($new_lid);
           $_SESSION['location'] = $new_lid;
+          $changed = 1;
         }
 
         if (!empty($_POST['change-bio'])) {
           updateBio($_POST['change-bio']);
+          $changed = 1;
+        }
+
+        if ($changed) {
+          header('Location: ./profile.php');
         }
     }
 
@@ -58,7 +66,7 @@
                 errorMessage($settings_error);
               ?>  
             <?php endif; ?>
-            <form name="settings" action="#" method="POST" enctype="multipart/form-data" onsubmit="return validateSettings()">
+            <form name="settings" action="#" method="POST" enctype="multipart/form-data">
             <h5>Profile Image Change:</h5>
               <input
                 type="file"
@@ -79,7 +87,7 @@
           </div>
           <div class="settings-bio">
             <h3>Change Bio:</h3>
-              <textarea name="change-bio" id="" cols="50" rows="20"></textarea>
+              <textarea name="change-bio" id="" cols="50" rows="5" maxlength="150"></textarea>
               <input type="submit" name="submitButton" />
           </div>
           </form>

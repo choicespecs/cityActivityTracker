@@ -193,7 +193,7 @@
         }
     }
 
-    function createPost($pid) {
+    function createPost($pid, $userPostVerify) {
         $conn = currentDB();
         $query = "SELECT * FROM post where pid = {$pid} limit 1";
         $result = mysqli_query($conn, $query);
@@ -206,11 +206,11 @@
 
         echo "<div class='post-more-card'>
                 <div class = 'post-more-information'>
-                    <div class = 'post-more-image'>
-                        <img src = '{$img_path}' alt='' />
-                    </div>
                     <div class ='post-more-activity-name'>
                         <h2> {$title} </h2>
+                    </div>
+                    <div class = 'post-more-image'>
+                        <img src = '{$img_path}' alt='' />
                     </div>
                     <div class='post-more-same-line'>
                         <div class='post-more-user-info'>
@@ -220,8 +220,11 @@
                     </div>
                     <p class ='post-more-description'>
                     {$description}
-                    </p>
-                </div>
+                    </p>";
+                    if ($userPostVerify) {
+                        echo "<a class='login-bottom-button' href='../php/deletePost.php?pid={$pid}' style='color:white'>Delete Post</a>";
+                    }
+            echo "</div>
             </div>";
     }
 ?>

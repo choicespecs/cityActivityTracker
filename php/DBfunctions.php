@@ -250,6 +250,21 @@
         $result = mysqli_query($conn, $query);
     }
 
+    function verifyUserToPost($pid) {
+        $userPostTrue = 0;
+        $conn = currentDB();
+        $query = "select uid from post where pid = {$pid} limit 1";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        $uid = intval($row['uid']);
+        if (isset($_SESSION['user'])) {
+            if ($_SESSION['user'] == $uid) {
+                $userPostTrue = 1;
+            }
+        }
+        return $userPostTrue;
+    }
+
     function createActivityPost($img, $activity_name, $activity_location, $activity_type, $activity_description) {
         $post_img_path = uploadPostImage($img, $_SESSION['user'], $_SESSION['location']);
         if ($post_img_path != 'error') {

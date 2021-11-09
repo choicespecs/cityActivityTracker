@@ -2,6 +2,7 @@
     require '../php/htmlFunctions.php';
     session_start();
     $logged_in = 0;
+    $userPostVerify = verifyUserToPost($_GET['pid']);
     if (isset($_SESSION['logged_in'])) {
       $logged_in = $_SESSION['logged_in'];
     }
@@ -35,7 +36,7 @@
     </nav>
     <section class="screen">
       <div class="post-more-screen">
-        <?php createPost($_GET['pid']); ?>
+        <?php createPost($_GET['pid'], $userPostVerify); ?>
       </div>
     </section>
   </body>

@@ -33,18 +33,6 @@ function validateRegisterForm() {
   }
 }
 
-function validateSettings() {
-  const settingsForm = document.forms["settings"];
-  const bio = settingsForm["change-bio"].value;
-
-  if (bio.length > MAX_BIO_LENGTH) {
-    alert(
-      `Your bio is too long | CHARACTER [BIO]: ${bio.length} / ${MAX_BIO_LENGTH}`
-    );
-    return false;
-  }
-}
-
 function validateCreatePost() {
   const createForm = document.forms["create"];
   const postName = createForm["post-name"].value;

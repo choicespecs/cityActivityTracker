@@ -66,7 +66,8 @@
                 name="post-description"
                 id=""
                 cols="60"
-                rows="10"
+                rows="3"
+                maxlength="150"
               ></textarea>
             </div>
             <button type="submit" name="submitButton">Submit</button>
