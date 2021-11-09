@@ -6,25 +6,6 @@
 
     if (isset($_POST['submitButton'])) {
       createActivityPost($_FILES["post-img"], $_POST['post-name'], $_POST['post-location'], $_POST['post-activity'], $_POST['post-description']);
-
-      /*
-      $file_img = $_FILES["post-img"];
-      $post_img_path = uploadPostImage($file_img, $_SESSION['user'], $_SESSION['location']);
-      $activityName = $_POST['post-name'];
-      $location = validateLocation($_POST['post-location']);
-      $activity = validateActivity($_POST['post-activity']);
-      $user_id = $_SESSION['user'];
-      $description = $_POST['post-description'];
-
-      $conn = currentDB();
-      $query = "INSERT INTO `post` (`pid`, `uid`, `lid`, `aid`, `title`, `description`, `pimg_path`) VALUES (NULL, '$user_id', '$location', '$activity', '$activityName', '$description', '$post_img_path')";
-      $result = mysqli_query($conn, $query);
-      if ($result) {
-          echo "<script>console.log('post created' );</script>";
-      } else {
-          echo "<script>console.log('cannot add post' );</script>";
-      }
-      */
     }
 
     if (isset($_SESSION['create-error'])) {
