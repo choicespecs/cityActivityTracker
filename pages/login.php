@@ -6,12 +6,20 @@
       if(isset($_POST['username']) && isset($_POST['password'])) {
           try {
               connectDB();
-              loginDB($_POST["username"], $_POST["password"]);
+              $success = loginDB($_POST["username"], $_POST["password"]);
+              if ($success) { 
+                if(isset($_POST['rememberMe']) && $_POST['rememberMe'] == 'yes') {
+                  setcookie("username", $_POST["username"], time() + (86400 * 30), "/");
+                }
+                header('Location: ../index.php');
+                die();
+              }
           } catch(\Exception $e) {
               var_dump($e->getMessage());
           }
       }
     }
+
     if (isset($_SESSION['error_login'])) {
       $error_login = $_SESSION['error_login'];
     }
@@ -54,6 +62,10 @@
               <div class="login-password">
                 <label for="password">Password</label>
                 <input type="password" name="password" required />
+              </div>
+              <div class="remBox">
+                <input type="checkbox" name="rememberMe" value="yes">
+                <label for="rememberMe">Remember Me?</label>
               </div>
               <div class="login-bottom">
                 <a

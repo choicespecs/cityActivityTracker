@@ -1,6 +1,7 @@
 <?php
     require_once('./php/htmlFunctions.php');
     session_start();
+    verifyCookie();
     $logged_in = 0;
     if (isset($_SESSION['logged_in'])) {
       $logged_in = $_SESSION['logged_in'];
@@ -59,5 +60,6 @@
         </div>
       </div>
     </section>
+    <script src="./script.js"></script>
   </body>
 </html>

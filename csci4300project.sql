@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2021 at 03:29 PM
+-- Generation Time: Nov 30, 2021 at 04:42 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -80,6 +80,32 @@ CREATE TABLE `post` (
   `pimg_path` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`pid`, `uid`, `lid`, `aid`, `title`, `description`, `pimg_path`) VALUES
+(1, 1, 1, 1, 'Muscadine @ UGArden', 'Picking Muscadines with other volunteers at UGA. I had a blast working with others and trying my first muscadines ever.', '../post_img/MuscadineEvent31.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `postlikes`
+--
+
+CREATE TABLE `postlikes` (
+  `pid` int(10) NOT NULL,
+  `uid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `postlikes`
+--
+
+INSERT INTO `postlikes` (`pid`, `uid`) VALUES
+(1, 1),
+(1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -95,6 +121,14 @@ CREATE TABLE `user` (
   `img_path` varchar(100) NOT NULL,
   `lid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`uid`, `username`, `password`, `actual_name`, `bio`, `img_path`, `lid`) VALUES
+(1, 'admin', 'admin', 'Admin', 'This is the default account it doesnt do anything special I used this account as the main default one.', '', 1),
+(2, 'chris_lee', 'password', 'Christopher Lee', '', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -136,13 +170,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `pid` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

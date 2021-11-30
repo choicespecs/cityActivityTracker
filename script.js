@@ -52,3 +52,26 @@ function validateCreatePost() {
     return false;
   }
 }
+
+function likePost(post) {
+  const postLiked = post.getAttribute("data-liked");
+  let likeNumber = parseInt(post.getAttribute("data-number-likes"));
+  const pid = post.getAttribute("data-pid");
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("GET", `./php/likePostDB.php?pid=${pid}`);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 || this.status === 200) {
+      if (postLiked === "no") {
+        post.innerHTML = `Unlike ${likeNumber + 1}`;
+        post.setAttribute("data-liked", "yes");
+        post.setAttribute("data-number-likes", `${likeNumber + 1}`);
+      } else {
+        post.innerHTML = `Like ${likeNumber - 1}`;
+        post.setAttribute("data-liked", "no");
+        post.setAttribute("data-number-likes", `${likeNumber - 1}`);
+      }
+    }
+  };
+  xhttp.send();
+}

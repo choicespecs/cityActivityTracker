@@ -13,6 +13,9 @@
             case 3:
                 $error = "Error: Incorrect user name or password.";
                 break;
+            case 4:
+                $error = "Error: You must login / register to access page.";
+                break;
         }
         echo "<div class='login-error' style='text-align: center;'><h4> {$error} </h4></div>";
     }
@@ -77,36 +80,85 @@
         $logged_in = 0;
         if (isset($_SESSION['logged_in'])) {
             $logged_in = $_SESSION['logged_in'];
+        } else if (isset($_COOKIE["username"])) {
+            loginDBCookie($_COOKIE["username"]);
+            $logged_in = $_SESSION['logged_in'];
         }
-        
+
         if ($logged_in == 0) {
-            header('Location: ../index.php');
+            $_SESSION['error_login'] = 4;
+            header('Location: ../pages/login.php');
             die();
         }
     }
 
+    function verifyCookie() {
+        if (isset($_COOKIE["username"]) && !isset($_SESSION["logged_in"])) {
+            loginDBCookie($_COOKIE["username"]);
+        }
+    }
+
     function createCardThumbnail($pid, $username, $title, $img, $index) {
+        $postLikes = getLikes($pid);
+        $logged_in = 0;
+        if (isset($_SESSION['logged_in'])) {
+            $logged_in = $_SESSION['logged_in'];
+        }
+        $confirmLike = 0;
+        if ($logged_in) {
+            $confirmLike = confirmLike($pid);
+        }
+        $data_liked = '';
+        $like_string = '';
+        if ($logged_in && $confirmLike) {
+            $data_liked = 'yes';
+            $like_string = 'Unlike';
+        } else if ($logged_in && !$confirmLike) {
+            $data_liked = 'no';
+            $like_string = 'Like';
+        }
         $img_path = $img;
         if ($index == 1) {
             $img_path = substr($img_path, 1);
         }
-        echo "<a class='post-screen-card' href='./php/linkPost.php?pid={$pid}'>
+        echo "
+            <div class='post-screen-card'>
+            <a class='post-screen-card-content' href='./php/linkPost.php?pid={$pid}'>
             <div class='post-screen-card-userinfo'> 
                 <h2 class='post-screen-card-username'> {$username} </h2> 
             </div>
             <h5 class='post-screen-card-type'> {$title} </h5>
             <div class='post-screen-card-image'>
-                <img src= '{$img_path}' alt='' />
+            <img src= '{$img_path}' alt='' />
             </div>
             </a>";
+        
+        if ($logged_in) {
+            echo "<button class='likeButton' onclick='likePost(this);' data-liked='{$data_liked}' data-number-likes='{$postLikes}' data-pid='{$pid}'> {$like_string} {$postLikes}</button>";
+        } else {
+            echo "<span class = 'likeBox'> Likes : {$postLikes}</span>";
+        }
+        echo "</div>";
     }
 
     function createSearchCardThumbnail($pid, $username, $title, $img, $index) {
         $img_path = $img;
+        $postLikes = getLikes($pid);
+        $confirmLike = confirmLike($pid);
+        $data_liked = '';
+        $like_string = '';
+        if ($confirmLike) {
+            $data_liked = 'yes';
+            $like_string = 'Unlike';
+        } else {
+            $data_liked = 'no';
+            $like_string = 'Like';
+        }
         if ($index == 1) {
             $img_path = substr($img_path, 1);
         }
-        echo "<a class='post-screen-card' href='../php/linkPost.php?pid={$pid}'>
+        echo "<div class='post-screen-card'>
+            <a class='post-screen-card-content' href='../php/linkPost.php?pid={$pid}'>
             <div class='post-screen-card-userinfo'> 
                 <h2 class='post-screen-card-username'> {$username} </h2> 
             </div>
@@ -114,7 +166,9 @@
             <div class='post-screen-card-image'>
                 <img src= '{$img_path}' alt='' />
             </div>
-            </a>";
+            </a>
+            <button class='likeButton' onclick='likePost(this);' data-liked='{$data_liked}' data-number-likes='{$postLikes}' data-pid='{$pid}'> {$like_string} {$postLikes}</button>
+            </div>";
     }
 
     function searchActivitiesThumbnail($uid, $lid, $aid) {
@@ -194,6 +248,7 @@
     }
 
     function createPost($pid, $userPostVerify) {
+        $postLikes = getLikes($pid);
         $conn = currentDB();
         $query = "SELECT * FROM post where pid = {$pid} limit 1";
         $result = mysqli_query($conn, $query);
@@ -224,7 +279,8 @@
                     if ($userPostVerify) {
                         echo "<a class='login-bottom-button' href='../php/deletePost.php?pid={$pid}' style='color:white'>Delete Post</a>";
                     }
-            echo "</div>
+            echo "<span class='likeBox'> Likes : {$postLikes}</span>
+                </div>
             </div>";
     }
 ?>

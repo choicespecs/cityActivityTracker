@@ -1,6 +1,7 @@
 <?php    
     require '../php/htmlFunctions.php';
     session_start();
+    verifyCookie();
     $logged_in = 0;
     $userPostVerify = verifyUserToPost($_GET['pid']);
     if (isset($_SESSION['logged_in'])) {
@@ -39,5 +40,6 @@
         <?php createPost($_GET['pid'], $userPostVerify); ?>
       </div>
     </section>
+    <script src="../script.js"></script>
   </body>
 </html>

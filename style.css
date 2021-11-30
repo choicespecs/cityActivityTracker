@@ -130,8 +130,8 @@ nav {
   height: 400px;
   width: 300px;
   margin: 3em;
+  gap: 2em;
   border-radius: 0.75em;
-  cursor: pointer;
   -webkit-box-shadow: 5px 5px 22px 5px rgba(0, 0, 0, 0.42);
   box-shadow: 5px 5px 22px 5px rgba(0, 0, 0, 0.42);
 }
@@ -140,6 +140,18 @@ nav {
   margin: 1em;
   height: 50%;
   width: 50%;
+}
+
+.post-screen-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.post-screen-card-content:hover {
+  transform: scale(1.1);
 }
 
 footer {
@@ -567,4 +579,26 @@ footer {
   gap: 2em;
   display: flex;
   flex-direction: column;
+}
+
+.remBox {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.likeButton {
+  width: 80px;
+  height: 30px;
+  border-radius: 25px;
+}
+
+.likeBox {
+  width: 80px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  padding: 5px;
 }

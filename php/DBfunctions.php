@@ -41,14 +41,28 @@
             $_SESSION['location'] = $user_data['lid'];
             $_SESSION['logged_in'] = 1;
             $_SESSION['error_login'] = 0;
-            header('Location: ../index.php');
-            die();
+            return 1;
         } 
         else 
         {
             closeDB($conn);
             $_SESSION['error_login'] = 3;
+            return 0;
         }
+    }
+
+    function loginDBCookie($uname) {
+        $query = "select * from user where username = '".$uname."' limit 1";
+        $conn = currentDB();
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) == 1) {
+            $user_data = mysqli_fetch_assoc($result);
+            $_SESSION['user'] = $user_data['uid'];
+            $_SESSION['location'] = $user_data['lid'];
+            $_SESSION['logged_in'] = 1;
+            $_SESSION['error_login'] = 0;
+        } 
     }
 
     function registerDB($username, $password, $actual_name, $location) {
@@ -184,6 +198,26 @@
         $row = mysqli_fetch_assoc($result);
         $aid = intval($row['aid']);
         return $aid;
+    }
+
+    function getLikes($pid) {
+        $conn = currentDB();
+        $query = "select count(uid) from postlikes where pid = {$pid}";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        $postLikes = intval($row['count(uid)']);
+        return $postLikes;
+    }
+
+    function confirmLike($pid) {
+        $query = "select pid from postlikes where pid = {$pid} AND uid = {$_SESSION['user']}";
+        $conn = currentDB();
+        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) == 1) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     function checkUserImage($img) {
