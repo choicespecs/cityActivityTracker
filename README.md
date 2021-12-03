@@ -24,5 +24,3 @@ Only suitable for Desktop resolution not usable for mobile
 
 ## Libraries / Framework:
 None, used solely php, javascript, html, and css without using additional frameworks or libraries.
-
-=
