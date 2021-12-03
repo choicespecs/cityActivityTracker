@@ -11,10 +11,10 @@ You need xampp with apache / mysql and you must import the sql code that is prov
 ## Functionalities:
 1. Register as a user to a specific location.
 2. User can view activities within their area created by other users.
-  - These activities will contain information, likes, and can be specified by their activity type
+    - These activities will contain information, likes, and can be specified by their activity type
 4. User can also search for specific activities by activity type, location, or even other usernames
 5. User can create activities to share with other users in this platform
-  - These activities will contain 
+   - These activities will contain 
 
 1) This program will run on xampp or another apache / mysql middleware program. This requires you to place the appropriate files in the correct place
 2) This program will require two additional directories "user_img" and "post_img" for the image functionality to work correctly. 
