@@ -3,7 +3,7 @@
 Project for CSCI 4300 Web Programming
 
 ## Entry Point:
-You must access the application through index.html located inside the root directory. If you attempt to access any of the pages without correctly logging in through the login.php you will receive an error message indicating you must login.
+You must access access the application through index.php located inside the root directory. If you attempt to access any of the pages without logging in through the login.php you will receive an error message indicating you must login.
 
 ## How to start the Project:
 You need xampp with apache / mysql and you must import the sql code that is provided to create the appropriate databases. You can place all the files inside the htdocs folder in your xampp file and run the program through localhost to access
