@@ -16,6 +16,12 @@ You need xampp with apache / mysql and you must import the sql code that is prov
 5. User can create activities to share with other users in this platform
    - User can specify location, activity type, provide a title and description to their activity post.
 
+## Browsers / OS:
+Tested on Windows and Chrome OS, Firefox.   
+
+## Libraries / Framework:
+None, used solely php, javascript, html, and css without using additional frameworks or libraries.
+
 1) This program will run on xampp or another apache / mysql middleware program. This requires you to place the appropriate files in the correct place
 2) This program will require two additional directories "user_img" and "post_img" for the image functionality to work correctly. 
 3) mysql script has been provided to help set up the databases needed for this program.
