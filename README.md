@@ -6,7 +6,9 @@ Project for CSCI 4300 Web Programming
 You must access access the application through index.php located inside the root directory. If you attempt to access any of the pages without logging in through the login.php you will receive an error message indicating you must login.
 
 ## How to start the Project:
-You need xampp with apache / mysql and you must import the sql code that is provided to create the appropriate databases. You can place all the files inside the htdocs folder in your xampp file and run the program through localhost to whichever folder you located the files to.
+1. You need xampp with apache / mysql and you must import the sql code that is provided to create the appropriate databases. You can place all the files inside the htdocs folder in your xampp file.
+2. You need to create two new directories within this project for it to work correctly. The directories must be named specifically "user_img" and "post_img" if you do not create these two directories within the root directory you will be unable to create images for both activity posts and user posts.
+3. Run the program through localhost by xampp to whichever folder you located the files to.
 
 ## Functionalities:
 1. Register as a user to a specific location.
@@ -18,11 +20,9 @@ You need xampp with apache / mysql and you must import the sql code that is prov
 
 ## Browsers / OS:
 Tested on Windows and Chrome OS, Firefox.   
+Only suitable for Desktop resolution not usable for mobile
 
 ## Libraries / Framework:
 None, used solely php, javascript, html, and css without using additional frameworks or libraries.
 
-1) This program will run on xampp or another apache / mysql middleware program. This requires you to place the appropriate files in the correct place
-2) This program will require two additional directories "user_img" and "post_img" for the image functionality to work correctly. 
-3) mysql script has been provided to help set up the databases needed for this program.
-4) This program / application is ONLY for desktop use and has not been adjusted for mobile or tablet screens at this moment.
+=
